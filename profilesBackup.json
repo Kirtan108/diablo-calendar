@@ -1,0 +1,72 @@
+[
+  {
+    "_id": "64f739108322d1e1ccefa26b",
+    "userID": "1119579873044861050",
+    "createdAt": "2023-09-05T14:20:00.604Z",
+    "updatedAt": "2023-11-11T13:19:53.024Z",
+    "__v": 0,
+    "battleNet": "Kirtan#21529",
+    "duriel_admissions": 0,
+    "events_joined": 0
+  },
+  {
+    "_id": "64f745dc91f4423ff83ebb6c",
+    "userID": "400021835925684234",
+    "battleNet": "RedYoshi#21142",
+    "createdAt": "2023-09-05T15:14:36.513Z",
+    "updatedAt": "2023-11-11T13:19:53.065Z",
+    "__v": 0,
+    "duriel_admissions": 0,
+    "events_joined": 0
+  },
+  {
+    "_id": "64f753c591f4423ff83ebb74",
+    "userID": "775798704338239539",
+    "battleNet": "necromancer#23134",
+    "createdAt": "2023-09-05T16:13:57.314Z",
+    "updatedAt": "2023-11-11T13:19:53.146Z",
+    "__v": 0,
+    "duriel_admissions": 0,
+    "events_joined": 0
+  },
+  {
+    "_id": "64fa2cd6322f032c9b0c65f1",
+    "userID": "394462700677103616",
+    "battleNet": "Torre25#2143",
+    "createdAt": "2023-09-07T20:04:38.881Z",
+    "updatedAt": "2023-11-11T13:19:53.180Z",
+    "__v": 0,
+    "duriel_admissions": 0,
+    "events_joined": 0
+  },
+  {
+    "_id": "6522c338671cfb45b03c10eb",
+    "userID": "518531757772111872",
+    "battleNet": "Zacek#21692",
+    "createdAt": "2023-10-08T14:56:56.576Z",
+    "updatedAt": "2023-11-11T13:19:53.213Z",
+    "__v": 0,
+    "duriel_admissions": 0,
+    "events_joined": 0
+  },
+  {
+    "_id": "65251c3abf92daf12a8ba7e9",
+    "userID": "697184511355650059",
+    "battleNet": "Aventurier#229156838",
+    "createdAt": "2023-10-10T09:41:14.707Z",
+    "updatedAt": "2023-11-11T13:19:53.250Z",
+    "__v": 0,
+    "duriel_admissions": 0,
+    "events_joined": 0
+  },
+  {
+    "_id": "652eadb0a3502c2a89e01434",
+    "userID": "206144640632487936",
+    "battleNet": "SandorPerro#2669",
+    "createdAt": "2023-10-17T15:52:16.172Z",
+    "updatedAt": "2023-11-11T13:19:53.283Z",
+    "__v": 0,
+    "duriel_admissions": 0,
+    "events_joined": 0
+  }
+]

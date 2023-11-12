@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Authorization Success</title>
+        <style>
+            body {
+                background-color: #1E1E1E;
+                color: #ffffff; /* Set text color to white or any other light color for visibility */
+                font-family: Arial, sans-serif;
+                text-align: center; /* Centering the content */
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+            body, html {
+                height: 100%;
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #1E1E1E; /* Or any other background color */
+            }
+            img {
+                max-width: 90%; /* Adjust as needed */
+                max-height: 90vh; /* Adjust as needed */
+                object-fit: contain; /* This ensures that the aspect ratio is maintained */
+            }
+            /* Additional styles can be added here */
+        </style>
+    </head>
+    <body>
+        <img src="./static/success_red.png" alt="Account linked successfully! Redirecting to Discord.">
+        <script>
+            setTimeout(function() {
+                window.location.href = 'https://discord.gg/8GDxUyS8sQ'; // Redirect after 3.5 seconds
+            }, 3500);
+        </script>
+    </body>
+</html>
