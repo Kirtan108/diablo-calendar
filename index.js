@@ -7,6 +7,8 @@ const commandLoader = require('./commandLoader')
 const eventHandler = require("./eventHandler")
 
 const { keepAlive, postAccessRole } = require("./server.js")
+const { createMatchGroups, createMatchMessage } = require("./utils/functions")
+const { getMatch, getProfile, createMatch } = require("./mongo/functions")
 
 const { default: mongoose } = require("mongoose")
 
@@ -35,6 +37,7 @@ client.on("ready", async () => {
 
   console.log(`Logged in as ${client.user.tag}`)
   postAccessRole(client)
+  createMatchGroups(client, getMatch, getProfile, createMatchMessage, createMatch)
 })
 
 client.on('messageCreate', async (message) => {

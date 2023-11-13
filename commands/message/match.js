@@ -34,7 +34,7 @@ module.exports = {
 
         const matchEmbed = new EmbedBuilder()
             .setColor(brand_color)
-            .setTitle(`⸺ DURIEL MATCH`)
+            .setTitle(`⸺ DURIEL RAID`)
             .setDescription(durielMatchDescription)
             .addFields(
                 { name: `• Players Queue`, value: `0`, inline: false },

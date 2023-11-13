@@ -30,7 +30,6 @@ const Match = {
         const matchId = `${matchType.value}_${worldTier.value}_${isoTimestamp}`
         
         const raidUpdate = await updateMatch(matchId, interaction)
-        console.log(matchId)
         if ( raidUpdate === 404 ) return interaction.followUp({ content: `You are already in queue!`, ephemeral: true })
         
         const originalEmbed = interaction.message.embeds[0];
