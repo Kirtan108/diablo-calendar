@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const moment = require('moment');
-const utils = require('../utils/exports');
+const utils = require('../utils/functions');
 
 const profileSchema = new mongoose.Schema({
     user_id: { type: String, require: true, unique: true},

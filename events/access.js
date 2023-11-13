@@ -12,7 +12,7 @@ const img_access = "https://cdn.discordapp.com/attachments/1172983109411688458/1
 
 const embed = new EmbedBuilder()
 .setColor(0x1788EC)
-.setTitle('⸺ CUENTA BATTLE.NET')
+.setTitle('⸺ BATTLE.NET ACCOUNT')
 .setDescription("Para verificar tu cuenta de Battle.Net utiliza el enlaze que hay a continuación.")
 .setImage(img_access)
 

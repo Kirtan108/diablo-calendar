@@ -1,0 +1,5 @@
+module.exports.findProfile = require('./profile/findProfile')
+module.exports.createAccessProfile = require('./profile/createAccessProfile')
+module.exports.updateProfile = require('./profile/updateProfile')
+module.exports.createMatch = require('./match/createMatch')
+module.exports.updateMatch = require('./match/updateMatch')
