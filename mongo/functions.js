@@ -1,4 +1,4 @@
-const { profileModel, raidModel } = require("./models.js")
+const { profileModel, raidModel, matchModel } = require("./models.js")
 
 async function findProfile(interaction) {
     const member = interaction.guild.members.cache.get(interaction.user.id)
@@ -119,6 +119,42 @@ async function updateRaid(date, interaction, turn) {
         console.error(error);
     }
 }
+ 
+async function createMatch(match_type, world_tier) {
+    let match;
+
+    try {
+        // Check if a raid already exists for this date
+        const lastMatch = await matchModel.findOne().sort({ matchNumber: -1 }); // matchModel.findOne({ matchName: match_name });
+        const match_number = !lastMatch ? 1 : lastMatch.matchNumber + 1; // Increment the last matchNumber by 1
+
+        if (match_type && world_tier) {
+            match = await matchModel.create({
+                matchType: match_type,
+                worldTier: world_tier,
+                matchNumber: match_number 
+            });
+            await match.save();
+        }
+        return match;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+const lastMatch = async () => {
+    try {
+        // Find the last match based on the matchNumber
+        const lastMatch = await matchModel.findOne().sort({ matchNumber: -1 });
+        if (!lastMatch) {
+            return 1; // If no matches exist, start with matchNumber 1
+        }
+        return lastMatch.matchNumber + 1; // Increment the last matchNumber by 1
+    } catch (err) {
+        console.error('Error fetching last match:', err);
+        return null;
+    }
+};
 
 module.exports = {
     findProfile,
@@ -126,5 +162,7 @@ module.exports = {
     createAccessProfile,
     updateProfile,
     createRaid,
-    updateRaid
+    updateRaid,
+    createMatch,
+    lastMatch
 }

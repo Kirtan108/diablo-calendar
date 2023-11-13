@@ -42,6 +42,7 @@ function postAccessRole(client) {
  app.post('/discord/assign-access-role', async (req, res) => {
     const access_role = "1172957050410635314"
     const { discordId } = req.body;
+    if (!discordId) return null
     
     try {
         const member = await client.guilds.cache.first().members.fetch(discordId);

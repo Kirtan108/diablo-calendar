@@ -42,8 +42,9 @@ client.on('messageCreate', async (message) => {
     const member = message.guild.members.cache.get(message.author.id)
     // if (message.channel == process.env.GM_CH) await message.delete().catch(err => console.log(err));
 
-    // const hasPioneer = await member["_roles"].findIndex(r => r === process.env.PIONEER_ROLE)
-    // if (hasPioneer === -1) return
+    const PIONEER_ROLE = "1172957701320474625"
+    const hasPioneer = await member["_roles"].findIndex(r => r === PIONEER_ROLE)
+    if (hasPioneer === -1) return
     const prefix = config.prefix
     if (!message.content.startsWith(prefix)) return
 
