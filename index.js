@@ -38,7 +38,6 @@ client.on("ready", async () => {
   console.log(`Logged in as ${client.user.tag}`)
 
   postAccessRole(client)
-  client.createMatchGroups();
   createMatchGroups(client, getMatch, getProfile, createMatchMessage, createMatch)
   setInterval(async () => {
     deleteOldThreads(client)
