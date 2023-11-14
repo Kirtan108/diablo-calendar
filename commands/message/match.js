@@ -57,12 +57,16 @@ module.exports = {
             .setColor(0x2f3136)
 
         const button = new ButtonBuilder()
-            .setCustomId(`match`)
-            .setLabel('FIND GROUP')
-            .setStyle(ButtonStyle.Success)
-
-            
-        const row = new ActionRowBuilder().addComponents(button)
+        .setCustomId(`match_join`)
+        .setLabel('Find Group')
+        .setStyle(ButtonStyle.Success)
+        
+        const buttonTwo = new ButtonBuilder()
+        .setCustomId(`match_leave`)
+        .setLabel('Leave Queue')
+        .setStyle(ButtonStyle.Danger)
+    
+        const row = new ActionRowBuilder().addComponents(button, buttonTwo)
 
         await message.guild.channels.cache.get(match_channel).send({ embeds: [matchEmbed], components: [row] })
         // await message.channel.send({ embeds: [embed], components: [row] })

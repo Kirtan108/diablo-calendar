@@ -27,9 +27,14 @@ async function createMatchGroups(client, getMatch, getProfile, createMatchMessag
   }
   setInterval(async () => {
     const messages = await channel.messages.fetch()
+
     if (messages.size === 0) return matchCreation()
+
+    // An array to hold all the promises for thread creation and message deletion
+    let processingPromises = [];
+
     for (const m of messages.values()) {
-        if (!m || !m.embeds[0]) return
+        if (!m || !m.embeds[0]) continue
         const matchTitle = await m.embeds[0].title
         const matchType = await m.embeds[0].fields.find(f => f.name === '• Type')
         const worldTier = await m.embeds[0].fields.find(f => f.name === '• World Tier')
@@ -42,29 +47,44 @@ async function createMatchGroups(client, getMatch, getProfile, createMatchMessag
           const match = await getMatch(matchId)
           if (match && match.players && match.players.length > 0) {
             const playerGroups = sliceIntoGroups(match.players, 4); // Slice players into groups of 4
+            let threadPromises = [];
             let groupNumber = 1;
 
             for (const group of playerGroups) {
                const threadName = `${matchTitle} - Group ${groupNumber}`
-               const thread = await m.channel.threads.create({
+               const threadPromise = await m.channel.threads.create({
                  name: threadName,
                  autoArchiveDuration: 60,
                  type: ChannelType.PrivateThread,
                  reason: 'Matchmaking',
+                }).then(async thread => {
+                  for (const playerId of group) {
+                      await thread.members.add(playerId);
+                      const player = await getProfile(playerId);
+                      await thread.send(`<@${playerId}> - BattleTag: ${player.battle_tag}`);
+                  }
                 });
-                // const thread = await m.startThread({ name: 'Match Group', autoArchiveDuration: 60, reason: 'Matchmaking' });
-                for (const playerId of group) {
-                  thread.members.add(playerId)
-                  const player = await getProfile(playerId); // Fetch player data from MongoDB
-                  thread.send(`<@${playerId}> - BattleTag: ${player.battle_tag}`); // Post player information
-                }
+                // const thread = await m.startThread({ name: 'Match Group', autoArchiveDuration: 60, reason: 'Matchmaking' })
+                threadPromises.push(threadPromise);
                 groupNumber++;
                 // setTimeout(async () => await thread.delete(), 60000); // Delete thread after 1 minute
             }
-            await m.delete().catch(console.error)
+            // Wait for all threads to be processed, then delete the message
+            const messageProcessing = Promise.all(threadPromises)
+            .then(async () => await m.delete().catch(console.error));
+
+            processingPromises.push(messageProcessing);
+          } else {
+            // If no players, just delete the message
+            processingPromises.push(m.delete().catch(console.error));
           }
-          await matchCreation()
         }
+
+        // Wait for all message processing to complete, then create a new match
+        await Promise.all(processingPromises).then(async () => {
+          if (messages.size >= 1) return
+          await matchCreation();
+        });
     }
   }, 1000 * 5)
 }

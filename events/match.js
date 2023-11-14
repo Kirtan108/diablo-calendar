@@ -18,6 +18,11 @@ const Match = {
     execute: async function(interaction){
         const member = interaction.guild.members.cache.get(interaction.user.id)
         const mrole = interaction.guild.roles.cache.get(process.env.MEMBER_ROLE)
+        const user_id = interaction.user.id
+
+        const action = interaction.customId.split("_")[1]
+
+        const addToMatch = action === 'join'
         
         await interaction.deferReply({ ephemeral: true })
         
@@ -29,15 +34,16 @@ const Match = {
 
         const matchId = `${matchType.value}_${worldTier.value}_${isoTimestamp}`
         
-        const raidUpdate = await updateMatch(matchId, interaction)
-        if ( raidUpdate === 404 ) return interaction.followUp({ content: `You are already in queue!`, ephemeral: true })
+        const raidUpdate = await updateMatch(matchId, user_id, addToMatch)
+        if (raidUpdate === 404 && addToMatch) return interaction.followUp({ content: `You are already in queue!`, ephemeral: true })
+        if (raidUpdate === 404 && !addToMatch) return interaction.followUp({ content: `You are not in queue!`, ephemeral: true })
         
         const originalEmbed = interaction.message.embeds[0];
         let updatedFields = originalEmbed.fields.map(field => {
             if (field.name.includes(`• Players Queue`)) {
                 // Increment the count
                 let count = parseInt(field.value);
-                count += 1; // Increment the count
+                let sum = addToMatch ? count += 1 : count -= 1; // Increment or decrement the count
                 return { name: field.name, value: `${count.toString()}` };
             } else {
                 return field;

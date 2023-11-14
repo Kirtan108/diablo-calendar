@@ -12,6 +12,12 @@ const descripcion_esp = `Bienvenido a Diablo Calendar, la herramienta de matchma
 >・Tras la verificación, tendrás acceso a todas las áreas del servidor, incluyendo los canales de eventos y chat general.
 \n\n*Al verificar tu cuenta, confirmas tu compromiso de cumplir con las <#1172958958886072331>*`
 
+const description_eng = `
+Welcome to Diablo Calendar, the matchmaking tool for Diablo IV! Here you can find groups and organize your adventures efficiently.
+\nFor a secure and optimal experience, it's necessary to confirm your identity.
+\n**• INSTRUCTIONS**\n> 1. Interact with the inferion button and follow the instructions to link your Battle.Net account.\n> 2. After verification, you will have access to all areas of the server, including event channels and general chat.\n> 
+*• By verifying your account, you are confirming your commitment to comply with the <#1172958958886072331>*`
+
 module.exports = {
     data: {
       name: "verify",
@@ -23,8 +29,8 @@ module.exports = {
 
       const embed = new EmbedBuilder()
       .setColor(brand_color)
-      .setTitle('⸺ VERIFICACIÓN')
-      .setDescription(descripcion_esp)
+      .setTitle('⸺ VERIFICATION')
+      .setDescription(description_eng)
       //.setImage(downPage)
       .setImage(img_portada)
 
@@ -34,7 +40,7 @@ module.exports = {
       
       const button = new ButtonBuilder()
 	    .setCustomId('access')
-	    .setLabel('ACCEDER')
+	    .setLabel('ACCESS')
 	    .setStyle(ButtonStyle.Secondary)
 
       const row = new ActionRowBuilder().addComponents(button)

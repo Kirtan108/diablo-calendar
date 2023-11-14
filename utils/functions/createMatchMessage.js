@@ -19,8 +19,8 @@ function createMatchMessage(match_type, world_tier) {
         { name: `• Players Queue`, value: `0`, inline: true },
         { name: '• Type', value: match_type, inline: true },
         { name: '• World Tier', value: world_tier, inline: true },
-        // { name: '\u200B', value: '\u200B', inline: true },
-        { name: "• Next Match", value: `<t:${date}:R>`, inline: false},
+        { name: "• Next Match", value: `<t:${date}:R>`, inline: true},
+        { name: '\u200B', value: '\u200B', inline: true },
     )
     // .setDescription(`Para apuntarte en los turnos reacciona al botón inferior.\n\n**IMPORTANTE:** Recuerda que debes tener materiales para 6 intentos.`)
     // .addFields(
@@ -33,11 +33,16 @@ function createMatchMessage(match_type, world_tier) {
     .setTimestamp()
 
     const button = new ButtonBuilder()
-    .setCustomId(`match`)
-    .setLabel('FIND GROUP')
+    .setCustomId(`match_join`)
+    .setLabel('Find Group')
     .setStyle(ButtonStyle.Success)
+
+    const buttonTwo = new ButtonBuilder()
+    .setCustomId(`match_leave`)
+    .setLabel('Leave Queue')
+    .setStyle(ButtonStyle.Danger)
     
-    const row = new ActionRowBuilder().addComponents(button)
+    const row = new ActionRowBuilder().addComponents(button, buttonTwo)
     const message = { embeds: [matchEmbed], components: [row]}
     return message
 }
