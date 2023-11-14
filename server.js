@@ -24,10 +24,6 @@ app.get('/', (req, res) => {
     res.redirect('https://discord.gg/xz3xDdUvxq')
 })
 
-app.get('*', (req, res) => {
-    res.redirect('/');
-});
-
 // app.get('/test', async (req, res) => {
 //     const discordId = "1119579873044861050"
 //     await fetch(`${baseUrl}/discord/assign-access-role`, {
@@ -132,6 +128,10 @@ app.get('/auth/battlenet/callback', async (req, res) => {
         console.error('Error in Battle.net OAuth flow:', error);
         res.status(500).send('Internal Server Error');
     }
+});
+
+app.get('*', (req, res) => {
+    res.redirect('/');
 });
 
 module.exports = { keepAlive, postAccessRole };
