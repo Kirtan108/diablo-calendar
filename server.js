@@ -20,17 +20,25 @@ function keepAlive() {
 app.use(express.json())
 app.use('/static', express.static(path.join(__dirname, './utils/misc')));
 
-app.get('/test', async (req, res) => {
-    const discordId = "1119579873044861050"
-    await fetch(`${baseUrl}/discord/assign-access-role`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ discordId: discordId })
-    });
-    res.send("Working!");
+app.get('/', (req, res) => {
+    res.redirect('https://discord.gg/xz3xDdUvxq')
+})
+
+app.get('*', (req, res) => {
+    res.redirect('/');
 });
+
+// app.get('/test', async (req, res) => {
+//     const discordId = "1119579873044861050"
+//     await fetch(`${baseUrl}/discord/assign-access-role`, {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({ discordId: discordId })
+//     });
+//     res.send("Working!");
+// });
 
 app.get('/success', async (req, res) => {
     const filePath = path.join(__dirname, './utils/misc/successPage.html');
