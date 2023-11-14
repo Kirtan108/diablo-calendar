@@ -1,18 +1,22 @@
 const { profileModel } = require("../../models.js")
 
-async function updateProfile(interaction, cuenta) {
-    const member = interaction.guild.members.cache.get(interaction.user.id);
-    let profile;
-
+async function updateProfile(userId, updates) {
     try {
-        profile = await profileModel.findOne({ user_id: interaction.user.id });
+        const profile = await profileModel.findOneAndUpdate(
+            { user_id: userId },
+            { $set: updates },
+            { new: true } // Return the updated document
+        );
 
-        if (!profile) return
-        profile.battle_net = cuenta; // Update the desired field(s) here
-        profile.save()
-        return profile
+        if (!profile) {
+            console.log("Profile not found");
+            return null;
+        }
+
+        return profile;
     } catch (error) {
-        console.error(error);
+        console.error("Error updating profile:", error);
+        return null;
     }
 }
 

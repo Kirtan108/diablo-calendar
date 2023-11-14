@@ -5,7 +5,15 @@ const utils = require('../utils/functions');
 const profileSchema = new mongoose.Schema({
     user_id: { type: String, require: true, unique: true},
     battle_tag: { type: String, require: true },
-    battle_net: { type: mongoose.Schema.Types.Mixed}
+    battle_net: { type: mongoose.Schema.Types.Mixed},
+    materials: { 
+        type: Map,
+        of: Number,
+        default: {
+            'Mucus-Slick Egg': 0,
+            'Shard of Agony': 0
+        }
+    },
     // duriel_admissions: { type: Number, min: 0, default: 0 },
     // events_joined: { type: Number, min: 0, default: 0 },
 }, {
