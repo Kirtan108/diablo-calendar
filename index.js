@@ -42,7 +42,7 @@ client.on("ready", async () => {
   setInterval(async () => {
     deleteOldThreads(client)
     deleteOldMatches()
-  }, 1000 * 10)
+  }, 1000 * 60)
 })
 
 client.on('messageCreate', async (message) => {
