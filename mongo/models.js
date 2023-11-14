@@ -54,7 +54,7 @@ matchSchema.pre('save', function(next) {
 });
 
 const profileModel = mongoose.model('ProfileModels', profileSchema)
-const raidModel = mongoose.model('RaidModels', raidSchema);
+const raidModel = mongoose.model('RaidModels', matchSchema);
 const matchModel = mongoose.model('MatchModels', matchSchema)
 
 module.exports = { profileModel, raidModel, matchModel }

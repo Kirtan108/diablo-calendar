@@ -58,10 +58,15 @@ async function createMatchGroups(client, getMatch, getProfile, createMatchMessag
                  type: ChannelType.PrivateThread,
                  reason: 'Matchmaking',
                 }).then(async thread => {
+                  let threadMessage = ''
                   for (const playerId of group) {
                       await thread.members.add(playerId);
                       const player = await getProfile(playerId);
-                      await thread.send(`<@${playerId}> - BattleTag: ${player.battle_tag}`);
+                      threadMessage += `<@${playerId}> - BattleTag: ${player.battle_tag}\n`
+                      // await thread.send(`<@${playerId}> - BattleTag: ${player.battle_tag}`);
+                  }
+                  if (threadMessage) {
+                    await thread.send(threadMessage);
                   }
                 });
                 // const thread = await m.startThread({ name: 'Match Group', autoArchiveDuration: 60, reason: 'Matchmaking' })
