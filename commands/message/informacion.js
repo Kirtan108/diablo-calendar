@@ -4,6 +4,14 @@ const downPage = "https://cdn.discordapp.com/attachments/1034106468800135168/104
 const config = require('../../config.js')
 const brand_color = config.colors.brand
 
+const infoDescription = `The first thing to do is to make sure you have your <#1174055586871132330> profile updated with the corresponding materials. Once completed, you will be able to access the quickplay and raid matches. 
+**• QUICKPLAY**
+They are oriented to organize quick games through quick group matches that happen every 5 minutes.
+\n**• RAIDS**
+They are oriented to organize raids to make several tries or a longer event. These are matches that occur every 90 minutes.
+\n**Beware**
+> Respect for others is important and this implies both good behavior and being present when the event happens. If you will not be able to be present, please leave the queue using the corresponding button before the event.`
+
 module.exports = {
     data: {
         name: "info",
@@ -15,11 +23,10 @@ module.exports = {
 
         const embed = new EmbedBuilder()
             .setColor(brand_color)
-            .setTitle('⸺ GUÍA DE USO')
-            .setDescription(`En esta sección, el objetivo es mantener un registro sencillo pero efectivo para hacer un seguimiento de todos los miembros. Este registro tiene la intención de mantener a todos informados sobre la actividad de nuestros compañeros de la hermandad.*\n\n・ Regístrate utilizando el botón inferior para aportar tu cuenta de BattleNet\n\nUna vez registrado, tan solo necesitarás ir al canal de <#1148550651454955580> para indicar tu actividad.\n\n**⸺ ACTIVOS **\n> En el canal <#1148546501405053032> aparecerán los miembros que estén jugando semanalmente al Diablo 4.\n\n**IMPORTANTE:** Si has jugado en algún momento durante la semana con el jugador, reacciona en el emoji que aparecerá debajo del perfil.\n\n**⸺ AUSENTES **\n\n> En el canal <#1148546258387075154> aparecerán los miembros que no estén jugando semanalmente al Diablo 4.
-            `)
+            .setTitle('⸺ HOW TO USE')
+            .setDescription(infoDescription)
             .setImage(downPage)
-            .setFooter({ text: '*No es necesario ser muy activo para formar parte de nuestra hermandad. Lo que buscamos es evitar que tengamos miembros que nunca vuelvan a jugar y que no tengamos información sobre su actividad.' });
+            //.setFooter({ text: '*No es necesario ser muy activo para formar parte de nuestra hermandad. Lo que buscamos es evitar que tengamos miembros que nunca vuelvan a jugar y que no tengamos información sobre su actividad.' });
 
         const front = new EmbedBuilder()
             .setImage("https://cdn.discordapp.com/attachments/1029344506065190913/1052413149762027602/Copia_de_logo_1.png")
@@ -32,6 +39,6 @@ module.exports = {
 
         const row = new ActionRowBuilder().addComponents(button)
 
-        await message.channel.send({ embeds: [embed], components: [row] })
+        await message.channel.send({ embeds: [embed], components: [] })
     },
 };

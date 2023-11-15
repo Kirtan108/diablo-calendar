@@ -3,9 +3,13 @@ const config = require('../config.js')
 const brand_color = config.colors.brand
 const duriel_img = config.media.boss.duriel
 
-const durielMatchDescription = `To search for a quick group and make a try at duriel react with the lower button. The pairing is every 5 minutes.
-\n**Important**
-Remember that you must have enough material for at least one try, since the groups are made of 4 and everyone contributes with a try.`
+const durielQuickplayDescription = `To search for a quick group and make a try to Duriel react with the lower button. The pairing is every 5 minutes.
+\n**Requirements:** 1x Duriel Admission\n**Total Attempts:** 4
+Remember that everyone contributes with a try each time. If you don't contribute, you will be banned!`
+
+const durielRaidDescription = `To search for a steady group and make several tries to Duriel react with the lower button. The pairing is every 90 minutes.
+\n**Requirements:** 5x Duriel Admission\n**Total Attempts:** 20
+Remember that everyone contributes with a try each time. IF you don't contribute, you will be banned!`
 
 function createMatchMessage(channel, match_type, world_tier) {
     const isQuickplay = channel.parentId === '1173560986519740486'; // Quickplay category ID
@@ -13,6 +17,7 @@ function createMatchMessage(channel, match_type, world_tier) {
     const date = Math.floor(Date.now() / 1000 + time);
     const title = isQuickplay ? `⸺ ${channel.name.toUpperCase()} QUICKPLAY` : `⸺ ${channel.name.toUpperCase()} RAID`;
     const nextMatch = isQuickplay ? `<t:${date}:R>` : `<t:${date}:t>`
+    const description = isQuickplay ? durielQuickplayDescription : durielRaidDescription
 
     const matchEmbed = new EmbedBuilder()
     .setColor(brand_color)
