@@ -6,7 +6,7 @@ const brand_color = config.colors.brand
 const img = config.media.guide
 
 const infoDescription = `The first thing to do is to make sure you have your <#1174055586871132330> profile updated with the corresponding materials. Once completed, you will be able to access the quickplay and raid matches. 
-**• QUICKPLAY**
+\n**• QUICKPLAY**
 They are oriented to organize quick games through quick group matches that happen every 5 minutes.
 \n**• RAIDS**
 They are oriented to organize raids to make several tries or a longer event. These are matches that occur every 90 minutes.
