@@ -26,7 +26,7 @@ module.exports = {
 
         const time = 60 * 5 // 5 minutes ----- 60 * 60 * 12
         const date = Math.floor(Date.now()/1000 + time)
-        const duration = 60 * 60 * 24 * 3
+        const duration = 60 * 60 * 24 * 5
         const end = Math.floor(Date.now()/1000 + duration)
 
         const matchEmbed = new EmbedBuilder()
