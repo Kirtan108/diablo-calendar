@@ -4,11 +4,11 @@ const brand_color = config.colors.brand
 const duriel_img = config.media.boss.duriel
 
 const durielQuickplayDescription = `To search for a quick group and make a try to Duriel react with the lower button. The pairing is every 5 minutes.
-\n**Requirements:** 1x Duriel Admission\n**Total Attempts:** 4
+\n**• Requirements:**\n> 1x Duriel Admission\n\n**• Total Attempts:\n> ** 4\n
 Remember that everyone contributes with a try each time. If you don't contribute, you will be banned!`
 
 const durielRaidDescription = `To search for a steady group and make several tries to Duriel react with the lower button. The pairing is every 90 minutes.
-\n**Requirements:** 5x Duriel Admission\n**Total Attempts:** 20
+\n**• Requirements:**\n> 5x Duriel Admission\n\n**• Total Attempts:\n> ** 20\n
 Remember that everyone contributes with a try each time. IF you don't contribute, you will be banned!`
 
 function createMatchMessage(channel, match_type, world_tier) {
