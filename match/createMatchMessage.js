@@ -28,7 +28,7 @@ function createMatchMessage(channel, match_type, world_tier) {
         { name: '• Type', value: match_type, inline: true },
         { name: '• World Tier', value: world_tier, inline: true },
         { name: "• Next Match", value: `<t:${date}:R>`, inline: false},
-        { name: '\u200B', value: '\u200B', inline: true },
+        //{ name: '\u200B', value: '\u200B', inline: true },
     )
     // .setDescription(`Para apuntarte en los turnos reacciona al botón inferior.\n\n**IMPORTANTE:** Recuerda que debes tener materiales para 6 intentos.`)
     // .addFields(
