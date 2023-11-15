@@ -1,9 +1,11 @@
-const { matchModel } = require("../../models.js")
+const { matchModel, raidModel } = require("../../models.js")
 
 async function getMatch(match_name) {
     try {
         // Find the raid document for the given date
-        let match = await matchModel.findOne({ matchName: match_name });
+        const isQuickplay = match_name.includes('quickplay');
+        const Model = isQuickplay ? matchModel : raidModel;
+        let match = await Model.findOne({ matchName: match_name });
 
         if (match) {
             return match

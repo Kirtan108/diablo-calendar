@@ -20,11 +20,11 @@ const profileSchema = new mongoose.Schema({
     timestamps: true // Esto agrega los campos createdAt y updatedAt
 })
 
-const raidSchema = new mongoose.Schema({
-    raidDate: { type: String, require: true },
-    turnA: [ String ], // Array of user IDs for the first turn
-    turnB: [ String ] // Array of user IDs for the second turn
-});
+// const raidSchema = new mongoose.Schema({
+//     raidDate: { type: String, require: true },
+//     turnA: [ String ], // Array of user IDs for the first turn
+//     turnB: [ String ] // Array of user IDs for the second turn
+// });
 
 const matchSchema = new mongoose.Schema({
     matchName: { type: String, unique: true, require: true },
@@ -45,6 +45,11 @@ const matchSchema = new mongoose.Schema({
         max: 4, // Assuming there are only four worlds
         require: true
     },
+    matchCategory: {
+        type: String,
+        enum: ['quickplay', 'raid'],
+        required: true
+    },
     matchDate: { type: Date, default: Date.now() },
     timestamp: { type: Number, require: true }, // Storing the date and time of match creation
     players: [ String ], // Array of user IDs participating in the match
@@ -56,7 +61,7 @@ matchSchema.pre('save', function(next) {
         return;
     }
     const matchIsoDate = utils.formatIsoDate(Date.now())
-    this.matchName = `${this.matchType}_${this.worldTier}_${matchIsoDate}`;
+    this.matchName = `${this.matchType}_${this.worldTier}_${this.matchCategory}_${matchIsoDate}`;
     this.timestamp = Date.now()
     next();
 });

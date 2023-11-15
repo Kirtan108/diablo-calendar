@@ -1,5 +1,5 @@
 const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require('discord.js')
-const config = require('../../config.js')
+const config = require('../config.js')
 const brand_color = config.colors.brand
 const duriel_img = config.media.boss.duriel
 
@@ -7,13 +7,16 @@ const durielMatchDescription = `To search for a quick group and make a try at du
 \n**Important**
 Remember that you must have enough material for at least one try, since the groups are made of 4 and everyone contributes with a try.`
 
-function createMatchMessage(match_type, world_tier) {
-    const time = 60 * 5 // 5 minutes ----- 60 * 60 * 12
-    const date = Math.floor(Date.now()/1000 + time)
+function createMatchMessage(channel, match_type, world_tier) {
+    const isQuickplay = channel.parentId === '1173560986519740486'; // Quickplay category ID
+    const time = isQuickplay ? (60 * 5) : (60 * 60 * 1.5); // 5 minutes for quickplay, 1.5 hours for raids
+    const date = Math.floor(Date.now() / 1000 + time);
+    const title = isQuickplay ? `⸺ ${channel.name.toUpperCase()} QUICKPLAY` : `⸺ ${channel.name.toUpperCase()} RAID`;
+    const nextMatch = isQuickplay ? `<t:${date}:R>` : `<t:${date}:t>`
 
     const matchEmbed = new EmbedBuilder()
     .setColor(brand_color)
-    .setTitle(`⸺ DURIEL RAID`)
+    .setTitle(title)
     .setDescription(durielMatchDescription)
     .addFields(
         { name: `• Players Queue`, value: `0`, inline: true },

@@ -1,9 +1,9 @@
-const { matchModel } = require("../../models.js")
+const { matchModel, raidModel } = require("../../models.js")
 
-async function updateMatch(match_name, user_id, addToMatch) {
+async function updateMatch(match_name, user_id, addToMatch, matchCategory) {
     try {
         // Find the raid document for the given date
-        let match = await matchModel.findOne({ matchName: match_name });
+        let match = matchCategory === 'quickplay' ? await matchModel.findOne({ matchName: match_name }) : await raidModel.findOne({ matchName: match_name })
 
         // If the raid exists, add the user to the specified turn
         if (match) {

@@ -1,7 +1,7 @@
 require('dotenv').config()
 const { EmbedBuilder, ChannelType } = require('discord.js');
 
-const { formatIsoDate, createMatchMessage } = require('../../utils/functions')
+const { formatIsoDate } = require('../../utils/functions')
 const { createMatch } = require('../../mongo/functions')
 
 function sliceIntoGroups(array, groupSize) {
@@ -12,10 +12,11 @@ function sliceIntoGroups(array, groupSize) {
   return groups;
 }
 
-async function createMatchGroups(client, getMatch, getProfile, createMatchMessage, createMatch){
+async function createMatchGroups(client, getMatch, getProfile, createMatchMessage){
 
   const MATCH_CHANNEL = "1172963206424182997"
-  const channel = await client.guilds.cache.get(`${process.env.GUILD_ID}`).channels.cache.get(`${MATCH_CHANNEL}`)
+  const RAID_CHANNEL = "1173981093033164913"
+  const channel = await client.guilds.cache.get(`${process.env.GUILD_ID}`).channels.cache.get(`${RAID_CHANNEL}`)
 
   async function matchCreation(){
     const match_type = 'boss'
@@ -25,7 +26,7 @@ async function createMatchGroups(client, getMatch, getProfile, createMatchMessag
     const durielMatchMessage = createMatchMessage(match_type, world_tier)
     return channel.send(durielMatchMessage)
   }
-  setInterval(async () => {
+
     const messages = await channel.messages.fetch()
 
     if (messages.size === 0) return matchCreation()
@@ -91,7 +92,6 @@ async function createMatchGroups(client, getMatch, getProfile, createMatchMessag
           await matchCreation();
         });
     }
-  }, 1000 * 5)
 }
 
 module.exports = createMatchGroups
