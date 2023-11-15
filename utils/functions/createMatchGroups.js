@@ -1,8 +1,8 @@
 require('dotenv').config()
 const { EmbedBuilder, ChannelType } = require('discord.js');
 
-const { formatIsoDate } = require('../../utils/functions')
-const { createMatch } = require('../../mongo/functions')
+// const { formatIsoDate } = require('../../utils/functions')
+// const { createMatch } = require('../../mongo/functions')
 
 function sliceIntoGroups(array, groupSize) {
   const groups = [];

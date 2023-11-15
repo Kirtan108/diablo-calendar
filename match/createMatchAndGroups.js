@@ -32,36 +32,33 @@ async function matchCreation(channel, match_type, world_tier) {
   return matchMessage ? channel.send(matchMessage) : null;
 }
 
-async function createThreadAndSendMessages(channel, title, groups, getProfile) {
-  // Filter groups to ensure they have at least 4 members
-  // const validGroups = groups.filter(group => group.length >= 4);
+async function createThreadAndSendMessages(channel, title, group, getProfile) {
+  const threadName = title;
+    const thread = await channel.threads.create({
+        name: threadName,
+        autoArchiveDuration: 60,
+        type: ChannelType.PrivateThread,
+        reason: 'Matchmaking',
+    });
 
-  let threadPromises = groups.map(async (group, index) => {
-      const threadName = `${title} - Group ${index + 1}`;
-      const thread = await channel.threads.create({
-          name: threadName,
-          autoArchiveDuration: 60,
-          type: ChannelType.PrivateThread,
-          reason: 'Matchmaking',
-      });
+    let threadMessage = '';
+    for (const playerId of group) {
+        const player = await getProfile(playerId);
+        if (player) {
+            threadMessage += `<@${playerId}> - BattleTag:\n> ${player.battle_tag}\n`;
+        } else {
+            console.log(`Player not found: ${playerId}`);
+        }
+    }
 
-      let threadMessage = '';
-      for (const playerId of group) {
-          const player = await getProfile(playerId);
-          threadMessage += `<@${playerId}> - BattleTag: ${player.battle_tag}\n`;
-      }
+    if (threadMessage) {
+        await thread.send(threadMessage);
+    }
 
-      if (threadMessage) {
-          await thread.send(threadMessage);
-      }
-
-      return thread;
-  });
-
-  return Promise.all(threadPromises);
+    return thread;
 }
 
-async function processMessages(client, channel, matchCategory, getMatch, getProfile) {
+async function processMessages(client, channel, getMatch, getProfile) {
   const messages = await channel.messages.fetch();
   const quickplayCategory = '1173560986519740486';
   const raidsCategory = '1172961227379576832';
@@ -85,7 +82,8 @@ async function processMessages(client, channel, matchCategory, getMatch, getProf
           const match = await getMatch(matchId);
           if (match && match.players && match.players.length > 0) {
               const playerGroups = sliceIntoGroups(match.players, 4);
-              let threadPromises = playerGroups.map((group, index) => createThreadAndSendMessages(channel, `${matchTitle} - Group ${index + 1}`, group, getProfile));
+              const validGroups = playerGroups.filter(group => group.length >= 4); // Adjust the minimum group size if needed          
+              let threadPromises = validGroups.map((group, index) => createThreadAndSendMessages(channel, `${matchTitle} - Group ${index + 1}`, group, getProfile));
               processingPromises.push(Promise.all(threadPromises));
           }
           processingPromises.push(m.delete().catch(console.error));
