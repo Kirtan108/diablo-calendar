@@ -10,6 +10,7 @@ const infoDescription = `The first thing to do is to make sure you have your <#1
 They are oriented to organize quick games through quick group matches that happen every 5 minutes.
 \n**• RAIDS**
 They are oriented to organize raids to make several tries or a longer event. These are matches that occur every 90 minutes.
+\nGroups will only be formed 4 by 4 and you will be notified in a separate thread. If there is not a total of 4 people in your group turn it will not be formed and you will have to wait for the next match.
 \n**Beware**
 > Respect for others is important and this implies both good behavior and being present when the event happens. If you will not be able to be present, please leave the queue using the corresponding button before the event.`
 
