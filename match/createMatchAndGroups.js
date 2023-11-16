@@ -86,7 +86,11 @@ async function processMessages(client, channel, getMatch, getProfile) {
               let threadPromises = validGroups.map((group, index) => createThreadAndSendMessages(channel, `${matchTitle} - Group ${index + 1}`, group, getProfile));
               processingPromises.push(Promise.all(threadPromises));
           }
-          processingPromises.push(m.delete().catch(console.error));
+          // if (m && !m.deleted) {
+          if (m && !m.deleted) {
+            processingPromises.push(m.delete().catch(console.error));
+          }
+          // processingPromises.push(m.delete().catch(console.error));
       }
   }
 
@@ -106,12 +110,12 @@ async function createMatchAndGroups(client) {
     const messages = await channel.messages.fetch()
     if (channel.parentId === quickplayCategory) {
         // Handle quickplay logic
-        if (messages.size === 0) return matchCreation(channel, match_type, world_tier, matchCategory)
+        if (messages.size === 0) await matchCreation(channel, match_type, world_tier, matchCategory)
         await processMessages(client, channel, getMatch, getProfile);
         // if (messages.size < 1) return matchCreation(channel, match_type, world_tier, matchCategory)
     } else if (channel.parentId === raidsCategory) {
         // Handle raids logic
-        if (messages.size === 0) return matchCreation(channel, match_type, world_tier, matchCategory)
+        if (messages.size === 0) await matchCreation(channel, match_type, world_tier, matchCategory)
         await processMessages(client, channel, getMatch, getProfile);
         // if (messages.size < 1) return matchCreation(channel, match_type, world_tier, matchCategory)
     }
