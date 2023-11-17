@@ -44,8 +44,8 @@ const Match = {
         const matchCategory = channel.parentId === quickplayCategory ? 'quickplay' : 'raid'
 
         const matchId = `${matchType.value}_${worldTier.value}_${matchCategory}_${isoTimestamp}`
-        if(durielAdmissions < 1) return interaction.followUp({ content: `You don't have enough materials for Duriel. Please update your profile.`, ephemeral: true })
-        if(matchCategory === 'raid' && durielAdmissions < 5) return interaction.followUp({ content: `You don't have enough materials for Duriel. Please update your profile.`, ephemeral: true })
+        if(channel.name.includes('duriel') && durielAdmissions < 1) return interaction.followUp({ content: `You don't have enough materials for Duriel. Please update your profile.`, ephemeral: true })
+        if(channel.name.includes('duriel') && matchCategory === 'raid' && durielAdmissions < 5) return interaction.followUp({ content: `You don't have enough materials for Duriel. Please update your profile.`, ephemeral: true })
         
         const raidUpdate = await updateMatch(matchId, user_id, addToMatch, matchCategory)
         if (raidUpdate === 404 && addToMatch) return interaction.followUp({ content: `You are already in queue!`, ephemeral: true })

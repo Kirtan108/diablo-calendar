@@ -18,7 +18,8 @@ function sliceIntoGroups(array, groupSize) {
 }
 
 async function matchCreation(channel, match_type, world_tier) {
-  const matchCategory = determineMatchCategory(channel)
+  const matchCategory = await determineMatchCategory(channel)
+  const { match_description, match_image } = await matchParameters(channel)
 
   const messages = await channel.messages.fetch({ limit: 1 });
   const lastMessage = messages.first();
@@ -28,7 +29,7 @@ async function matchCreation(channel, match_type, world_tier) {
   const existingMatch = await getMatch(matchName)
   const match = !existingMatch ? await createMatch(match_type, world_tier, matchCategory) : null
   if (!match) return;
-  const matchMessage = createMatchMessage(channel, match_type, world_tier);
+  const matchMessage = createMatchMessage(channel, match_type, world_tier, match_description, match_image);
   return matchMessage ? channel.send(matchMessage) : null;
 }
 

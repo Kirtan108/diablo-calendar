@@ -31,7 +31,10 @@ const matchSchema = new mongoose.Schema({
     matchNumber: { type: Number, min: 0 },
     matchType: { type: String, 
         enum: [
-            'boss',
+            'Duriel',
+            'Zir',
+            'Varshan',
+            'NMD',
             'dungeon', 
             'pvp',
             'helltide',
